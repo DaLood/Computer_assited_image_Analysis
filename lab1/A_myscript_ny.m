@@ -1,7 +1,7 @@
 clear all;
 close all;
 close force all
-kyrka = imread('domkyrka.png'); % Read the image and save it as kyrka
+kyrka = imread('domkyrka.jpg'); % Read the image and save it as kyrka
 % image(kyrka)
 % figure
 kyrka_grey = rgb2gray(kyrka);   % Convert the image to 128 x 128 pixel size,
