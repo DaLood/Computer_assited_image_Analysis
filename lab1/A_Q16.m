@@ -24,6 +24,7 @@ c = cumsum(freq_prob);  % Cumulative prob distribution
 
 T = round(c .* 256);   % Mapper
 
+
 Inew = T(I);
 Inew = uint8(Inew);
 
