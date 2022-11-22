@@ -105,27 +105,29 @@ I = double(imread('lines.png'));
 camera = double(imread('cameraman.png'));
 
 f  = fftshift(fft2(I));
+
+% Filter camera image Problem 12
 f_cam = fftshift(fft2(camera));
 % Problem 12
-camera_copy = camera;
-f_cam_copy = fftshift(fft2(camera_copy));
-f_cam_copy(20:30, 50:60) = 0;
-f_cam_copy(226:236, 206:216) = 0;
+f_cam_copy = fftshift(fft2(camera));
+[x, y] = size(f_cam_copy);
+f_cam_copy(120:138, 120:138) = 0;
 
 
-imagesc(I)
-figure
-imagesc(log(abs(f)))
-title('Log amp of Lines')
-figure
-imagesc(camera)
-figure
-imagesc(log(abs(f_cam)))
-title('Log amp of Camera Man')
-figure
-imagesc(log(abs(f_cam_copy)))
-figure
-imshow(ifft2(f_cam_copy))
+imagesc(I); title("Lines");
+
+figure; imagesc(log(abs(f))); title('Log amp of Lines');
+
+figure; imagesc(camera); title("Non filtered Cameraman");
+
+figure; imagesc(log(abs(f_cam))); title('Log amp of Camera Man');
+
+figure; imagesc(log(abs(f_cam_copy))); title("Filtered log amp camera");
+
+figure; imagesc(ifft2(ifftshift(f_cam_copy))); title("Filtered");
+
+% Zeros in the middle, so a highpass filtration of the original image
+% gives edge enhancement (middle pixel?)
 
 
 %%
@@ -144,3 +146,32 @@ imshow(image)
 % pair 1,5 = + reel and one has -&+ imag. , Pair 2,4 : - reel and one has -&+ imag.
 % If an even length vector = only reel values and no symmetry
 % The center value f(1,3) donesn't have any imaginary part : 3.153310
+
+
+%% Q13
+close all; clear;
+I = double(imread("freqdist.png"));
+
+If = fftshift(fft2(I));
+
+
+figure; imagesc(log(abs(If))); title('Log amp of freqdist');
+
+If(87:115, 78:106) = 0;
+If(87:115, 95:123) = 0;
+If(143:171, 152:180) = 0;
+If(143:171, 135:163) = 0;
+
+
+figure; imagesc(log(abs(If))); title("Filtered freq");
+
+
+
+figure; imagesc(I); title("Original");
+
+
+
+filtered_I = ifft2(ifftshift(If));
+figure; imagesc(filtered_I); title("Filtered I");
+imcontrast(gca)
+
