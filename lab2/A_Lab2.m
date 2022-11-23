@@ -3,20 +3,20 @@
 close all; 
 I = imread('cameraman.png');
 filter = fspecial("average", [3 3]);
-filter = fspecial('laplacian', 0.2);
+filter2 = fspecial('laplacian', 0.2);
 filter3 = fspecial('gaussian',[7 7], 2);
 c = imfilter(I,filter,"same");
-c2 = imfilter(I,filter, "same");
+c2 = imfilter(I,filter2, "same");
 c3 = imfilter(I, filter3, "same");
 
 impulse = [0,0,0; 0,1,0; 0, 0, 0];
 hp = impulse - filter;
 c4 = imfilter(I, hp, "same");
-br = filter + filter;
+br = filter2 + filter;
 bp  = impulse - br;
 c5 = imfilter(I,bp, "same");
 
-
+figure
 imshow(I)
 figure
 imshow(c)
@@ -47,8 +47,9 @@ imshow(sobel)
 figure
 imshow(c_lap)
 
-%%
-%Q3
+%% Q3
+
+%Q5
 close all; clear;
 I = imread('wagon_shot_noise.png');
 
@@ -69,7 +70,7 @@ figure
 imshow(I)
 
 %%
-%Q3 part 2
+%Q8
 close all; clear all;
 H = fspecial('disk',3);
 I = imread('wagon.png');
@@ -98,8 +99,8 @@ subplot(3,1,3)
 imagesc(ny)
 title('Vår kod')
 
-%%
-%Q4
+%% Q4
+
 close all; clear;
 I = double(imread('lines.png'));
 camera = double(imread('cameraman.png'));
